@@ -15,6 +15,9 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "cross-env": "^6.0.3",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1",
     "react-scripts": "3.3.0",
     "typescript": "~3.7.2"
   },
@@ -24,7 +27,19 @@
     "test": "react-scripts test",
     "test:ci": "cross-env CI=true react-scripts test",
     "test:coverage": "cross-env CI=true react-scripts test --coverage",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "./node_modules/.bin/prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
