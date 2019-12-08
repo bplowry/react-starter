@@ -14,6 +14,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "cross-env": "^6.0.3",
     "react-scripts": "3.3.0",
     "typescript": "~3.7.2"
   },
@@ -21,10 +22,21 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci": "cross-env CI=true react-scripts test",
+    "test:coverage": "cross-env CI=true react-scripts test --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts",
+      "!src/serviceWorker.ts",
+      "!src/index.tsx",
+      "!<rootDir>/node_modules/"
+    ]
   },
   "browserslist": {
     "production": [
