@@ -2,6 +2,7 @@
 // Having two versions of webpack (or a later version than CRA uses) breaks CRA
 // so I've copied to here for now.
 
+// https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/storybook__addon-storyshots/index.d.ts
 declare module '@storybook/addon-storyshots' {
   import { IStorybookStory } from '@storybook/react/dist/client/preview/types';
 
@@ -66,4 +67,36 @@ declare module '@storybook/addon-storyshots' {
   }
 
   export {};
+}
+
+// https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/storybook__addon-storyshots-puppeteer/index.d.ts
+declare module '@storybook/addon-storyshots-puppeteer' {
+  import { StoryContext } from '@storybook/addon-storyshots';
+  import { MatchImageSnapshotOptions } from 'jest-image-snapshot';
+  import {
+    ScreenshotOptions,
+    Page,
+    DirectNavigationOptions,
+    Browser
+  } from 'puppeteer';
+
+  export interface Context {
+    context: StoryContext;
+    url: string;
+  }
+
+  export interface CustomConfig {
+    storybookUrl?: string;
+    chromeExecutablePath?: string;
+    getMatchOptions?: (ctx: Context) => MatchImageSnapshotOptions;
+    getScreenshotOptions?: (ctx: Context) => ScreenshotOptions;
+    beforeScreenshot?: (page: Page, ctx: Context) => Promise<void>;
+    getGotoOptions?: (ctx: Context) => DirectNavigationOptions;
+    customizePage?: (page: Page) => Promise<void>;
+    getCustomBrowser?: () => Promise<Browser>;
+  }
+
+  export function imageSnapshot(
+    customConfig?: CustomConfig
+  ): ({ context }: { context: StoryContext }) => Promise<void>;
 }
