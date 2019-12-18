@@ -1,9 +1,5 @@
 module.exports = {
   stories: ['../src/**/*.stories.(tsx|mdx)'],
-  addons: [
-    '@storybook/addon-actions/register',
-    '@storybook/addon-links/register'
-  ],
   presets: [
     {
       name: '@storybook/preset-create-react-app',
@@ -16,6 +12,7 @@ module.exports = {
       options: {
         configureJSX: true
       }
-    }
+    },
+    '@storybook/addon-essentials'
   ]
 };
