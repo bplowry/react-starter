@@ -30,6 +30,7 @@
     "react-scripts": "3.3.0",
     "react-test-renderer": "^16.12.0",
     "source-map-explorer": "^2.1.2",
+    "start-server-and-test": "^1.10.6",
     "typescript": "~3.7.2"
   },
   "scripts": {
@@ -38,8 +39,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:ci": "cross-env CI=true react-scripts test",
+    "test:ci-vr": "cross-env CI=true yarn test:vr",
     "test:coverage": "cross-env CI=true react-scripts test --coverage",
-    "test:vr": "cross-env VR=true react-scripts test storyshots.vr",
+    "test:vr-only": "cross-env VR=true react-scripts test storyshots.vr",
+    "test:vr": "start-server-and-test storybook http-get://localhost:9009 test:vr-only",
     "cypress": "cypress open",
     "eject": "react-scripts eject",
     "prettier": "./node_modules/.bin/prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
